@@ -17,7 +17,7 @@ export const Header = () => {
 
   return (
     <Typography className={styles.root} component="h1" variant="h5">
-      Become a Member
+      Campagne de maintenance
     </Typography>
   );
 };

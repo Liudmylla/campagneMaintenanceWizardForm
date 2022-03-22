@@ -1,12 +1,8 @@
 import * as React from 'react';
 import { makeStyles, Box, Stepper, Step, StepButton, Button, Typography } from "@material-ui/core";
-import { PersonalInfo } from "./memberForm/1Personalinfo";
-import { Identity } from "./memberForm/2Identity";
-import { Interests } from "./memberForm/3Interests";
-import { CodeConduct } from "./memberForm/4CodeConduct";
-import { SlackConduct } from "./memberForm/5SlackConduct";
-import { ThankYou } from "./memberForm/6ThankYou"
 import General from './campagneForm/General';
+import Recherche from './campagneForm/Recherche';
+import Regroupement from './campagneForm/Regroupement';
 const useStyles = makeStyles((theme) => ({
 
     layout: {
@@ -48,15 +44,10 @@ function getStepContent(step) {
         case 0:
             return <General />;
         case 1:
-            return <Identity />;
+            return <Recherche />;
         case 2:
-            return <Interests />;
-        case 3:
-            return <CodeConduct />;
-        case 4:
-            return <SlackConduct />;
-        case 5:
-            return <ThankYou />;
+            return <Regroupement />;
+
         default:
             throw new Error('Unknown step');
     }

@@ -5,10 +5,12 @@ import DateFnsUtils from '@date-io/date-fns';
 import CampagneApp from "./CampagneApp";
 import { DataProvider } from './DataContext'
 import * as serviceWorker from "./serviceWorker";
+import { Header } from "./components/Header";
 
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>
+      <Header />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <CampagneApp />
       </MuiPickersUtilsProvider>
