@@ -1,10 +1,12 @@
 import React from 'react';
+import Draggable from 'react-draggable'
 import { useHistory } from "react-router-dom";
 import { useData } from "../DataContext";
 import { Controller, useForm } from "react-hook-form";
 import { Form } from "../components/Form";
 import {
     MenuItem, Select,
+    Box,
     Grid,
     InputLabel,
     TextField,
@@ -39,21 +41,35 @@ const Regroupement = () => {
     return (
         <React.Fragment>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Grid >
+                <Grid >   <Typography variant="h5" >
+                    Regroupements *
+                </Typography>
 
-                    <Typography variant="h5" >
-                        Regroupements *
-                    </Typography>
-                    <TextField
-                        fullWidth
-                        required
-                        variant="outlined"
-                        ref={register}
-                        id="regroupement"
-                        type="text"
-                        name="regroupement"
+                    <Draggable axis='x' >
 
-                    />
+                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2}>
+                            ITEM 1
+                        </Box>
+                    </Draggable>
+                    <Draggable axis='x' >
+
+                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
+                            ITEM 2
+                        </Box>
+                    </Draggable>
+                    <Draggable axis='x' >
+
+                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
+                            ITEM 3
+                        </Box>
+                    </Draggable>
+                    <Draggable axis='x' >
+
+                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
+                            ITEM 4
+                        </Box>
+                    </Draggable>
+
                 </Grid>
                 <Grid item xs={12}>
                     <Typography variant="h5" mb={2}>
