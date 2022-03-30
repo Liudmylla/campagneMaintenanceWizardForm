@@ -1,19 +1,29 @@
 import React from 'react';
 import Draggable from 'react-draggable'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { useData } from "../DataContext";
 import { Controller, useForm } from "react-hook-form";
 import { Form } from "../components/Form";
+import { PrimaryButton } from '../components/PrimaryButton';
+import { SecondaryButton } from '../components/SecondaryButton';
 import {
     MenuItem, Select,
     Box,
     Grid,
-    InputLabel,
-    TextField,
-    Typography, Button, styled, InputBase
+    InputLabel, Paper, styled,
+    Typography, Button,
 } from "@material-ui/core";
 
 import BootstrapInput from './BootstrapInput';
+import { MainContainer } from '../components/MainContainer';
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    height: '10rem',
+    color: theme.palette.text.secondary,
+}));
 
 
 const signalementData = [
@@ -31,48 +41,58 @@ const Regroupement = () => {
     const { setValues, data } = useData();
     const history = useHistory();
     const { register, handleSubmit, control } = useForm({
-
+        defaultValues: { typeSignalement: data.typeSignalement, typeIntervention: data.typeIntervention },
+        mode: "onBlur",
     });
-    const onSubmit = () => {
-        history.push("./regroupement");
+    const onSubmit = (data) => {
+        history.push("./addfiles");
         setValues(data);
     };
 
     return (
-        <React.Fragment>
+        <MainContainer>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Grid >   <Typography variant="h5" >
+                <Typography  >
                     Regroupements *
                 </Typography>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item xs={6}>
+                        <Item>
+                            <Typography >
+                                Non utilisés
+                            </Typography>
+                            <Draggable >
 
-                    <Draggable axis='x' >
+                                <Box maxWidth={130} border=' 0.1rem solid grey' padding={0.5} marginTop={2}>
+                                    EMPRISE
+                                </Box>
 
-                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2}>
-                            ITEM 1
-                        </Box>
-                    </Draggable>
-                    <Draggable axis='x' >
+                            </Draggable>
+                            <Draggable  >
+                                <Box maxWidth={130} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
+                                    ALIMENTATION
+                                </Box>
+                            </Draggable>
+                        </Item>
+                    </Grid>
 
-                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
-                            ITEM 2
-                        </Box>
-                    </Draggable>
-                    <Draggable axis='x' >
+                    <Grid item xs={6}>
+                        <Item>
+                            <Typography >
+                                Utilisés
+                            </Typography>
+                            <Draggable axis='x' >
+                                <Box maxWidth={130} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
+                                    LOT
+                                </Box>
+                            </Draggable>
+                        </Item>
 
-                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
-                            ITEM 3
-                        </Box>
-                    </Draggable>
-                    <Draggable axis='x' >
-
-                        <Box maxWidth={100} border=' 0.1rem solid grey' padding={0.5} marginTop={2} marginBottom={2}>
-                            ITEM 4
-                        </Box>
-                    </Draggable>
+                    </Grid>
 
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography variant="h5" mb={2}>
+                    <Typography mb={2}>
                         Associations par défault
                     </Typography>
                     <InputLabel htmlFor="typeSignalement" required>
@@ -87,7 +107,7 @@ const Regroupement = () => {
                                 input={<BootstrapInput />}
                             >
                                 {signalementData.map((item) => (
-                                    <MenuItem value={item.value}>{item.label}</MenuItem>
+                                    <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
                                 ))}
                             </Select>
                         }
@@ -101,24 +121,32 @@ const Regroupement = () => {
                     <Controller
                         control={control}
                         fullWidth
-                        name="typeInterventionl"
+                        name="typeIntervention"
                         as={
                             <Select id="typeIntervention" name="typeIntervention" ref={register}
                                 input={<BootstrapInput />}
                             >
                                 {interventionData.map((item) => (
-                                    <MenuItem value={item.value}>{item.label}</MenuItem>
+                                    <MenuItem key={item.value} value={item.value}>{item.label}</MenuItem>
                                 ))}
                             </Select>
                         }
                     />
                 </Grid>
-                <Typography variant="h5" mb={2}>
+                <Typography mb={2}>
                     Travaux réalisés (issus de la couche de recherche)
                 </Typography>
                 <Button variant="contained">+Ajouter un travail</Button>
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                    <Grid item xs={6}>
+                        <SecondaryButton ><Link to="/recherche" style={{ textDecoration: 'none' }}>Back</Link></SecondaryButton>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <PrimaryButton>Next</PrimaryButton>
+                    </Grid>
+                </Grid>
             </Form>
-        </React.Fragment >
+        </MainContainer>
     );
 };
 export default Regroupement

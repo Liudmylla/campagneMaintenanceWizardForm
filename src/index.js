@@ -6,16 +6,21 @@ import CampagneApp from "./CampagneApp";
 import { DataProvider } from './DataContext'
 import * as serviceWorker from "./serviceWorker";
 import { Header } from "./components/Header";
-
+import App from './App'
 ReactDOM.render(
   <React.StrictMode>
     <DataProvider>
-      <Header />
+      {/* <Header />
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <CampagneApp />
+      </MuiPickersUtilsProvider> */}
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <App />
       </MuiPickersUtilsProvider>
+
     </DataProvider>
   </React.StrictMode>,
+
   document.getElementById("root")
 );
 
